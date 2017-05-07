@@ -1,0 +1,23 @@
+.header .main-container .filters .content {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.profile-content {
+    background-color: #eee;
+    padding: 0px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.header {
+    height:60px;
+}
+
+hr {
+    margin-bottom: 8px;
+}
+
+.well {
+    padding-bottom: 8px;
+}

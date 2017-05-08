@@ -26,13 +26,6 @@ class Profile(models.Model):
     active = models.BooleanField(verbose_name='Активен', default=False)
 
     def get_full_name(self):
-        # type: () -> object
-        # type: () -> object
-        # type: () -> object
-        """
-
-        :rtype: object
-        """
         return '{} {}'.format(self.first_name, self.last_name)
 
     def get_departament(self):

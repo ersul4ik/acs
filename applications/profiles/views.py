@@ -3,17 +3,11 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-from applications.profiles.forms import FormProfile
+from applications.profiles.models import Profile
 
 
-def create_profile(request):
-    form = FormProfile(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            form_valid = form.save(commit=False)  # не сохраняем заполненую форму
+def profile_main(request):
+    template = 'profile.html'
+    access_list = Profile.objects.all()
+    return render(request, template, {'list': access_list})
 
-            form_valid.save()
-        else:
-            return render(request, "profile.html", {})
-
-    return render(request, "profile.html", {'form': form})

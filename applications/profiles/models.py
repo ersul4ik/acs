@@ -26,7 +26,13 @@ class Profile(models.Model):
     active = models.BooleanField(verbose_name='Активен', default=False)
 
     def __unicode__(self):
-        return '{} {}'.format(self.last_name, self.first_name)
+        return '{} {}'.format(self.first_name, self.last_name)
+
+    def get_full_name(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+
+    def get_departament(self):
+        return self.departament.title
 
 
 class WorkPeriod(models.Model):

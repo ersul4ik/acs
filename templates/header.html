@@ -2,7 +2,7 @@
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
               <div class="container-fluid">
                 <div class="navbar-header">
-                  <a class="navbar-brand" href="/">ACS</a>
+                  <a class="navbar-brand" href="/">Access Control System</a>
                   <p class="navbar-text">Администратор</p>
                 </div>
                   <ul class="nav navbar-nav navbar-right">
@@ -15,7 +15,7 @@
                         </div>
                       </form>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Эрик Султаналиев (КЦ) <b class="caret"></b></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.profile.get_full_name }} ({{ request.user.profile.get_departament }}) <b class="caret"></b></a>
                       <ul class="dropdown-menu">
                         <li><a href="#">Отчеты</a></li>
                         <li><a href="#">Пользователи</a></li>

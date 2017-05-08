@@ -8,8 +8,10 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    url(r'^', include('applications.reports.urls')),
+
     url(r'^admin/', admin.site.urls),
+    url(r'^test/', include('applications.profiles.urls')),
+    url(r'^', include('applications.reports.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

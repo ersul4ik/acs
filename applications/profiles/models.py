@@ -32,7 +32,7 @@ class Profile(models.Model):
         return '{} {}'.format(self.first_name, self.last_name)
 
     def get_departament(self):
-        return self.departament.title
+        return self.position.departament.title
 
 
 class WorkPeriod(models.Model):

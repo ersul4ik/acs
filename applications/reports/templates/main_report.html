@@ -14,62 +14,15 @@
             </tr>
             </thead>
             <tbody>
+            {% for u in list %}
             <tr>
+                <td>{{ u.user.profile.get_full_name }}</td>
+                <td>{{ u.user.profile.position.title }}</td>
+                <td>{{ u.coming }} - {{ u.leaving }}</td>
                 <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
+                <td><a href="/profiles/profile.html">Редактировать</a></td>
             </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
-            <tr>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td>Lorem.</td>
-                <td><a href="">Редактировать</a></td>
-            </tr>
+            {%  endfor %}
             </tbody>
         </table>
         <ul class="pagination pagination-sm">

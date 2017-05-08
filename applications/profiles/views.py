@@ -14,6 +14,6 @@ def create_profile(request):
 
             form_valid.save()
         else:
-            return render(request, "new.html", {})
+            return render(request, "profile.html", {})
 
-    return render(request, "new.html", {'form': form})
+    return render(request, "profile.html", {'form': form})

@@ -25,10 +25,14 @@ class Profile(models.Model):
     birthday = models.DateField(verbose_name='Дата рождения')
     active = models.BooleanField(verbose_name='Активен', default=False)
 
-    def __unicode__(self):
-        return '{} {}'.format(self.first_name, self.last_name)
-
     def get_full_name(self):
+        # type: () -> object
+        # type: () -> object
+        # type: () -> object
+        """
+
+        :rtype: object
+        """
         return '{} {}'.format(self.first_name, self.last_name)
 
     def get_departament(self):

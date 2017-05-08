@@ -13,7 +13,7 @@ GENDER_CHOICES = (
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, verbose_name='Пользователь')
+    user = models.OneToOneField(User, verbose_name='Пользователь')
     first_name = models.CharField(max_length=15, verbose_name='Имя')
     last_name = models.CharField(max_length=30, verbose_name='Фамилия')
     position = models.ForeignKey(Position, verbose_name='Должность')

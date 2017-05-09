@@ -18,7 +18,7 @@
             {% for item in user_list %}
             <tr>
                 <td>{{ item.user.profile.get_full_name }}</td>
-                <td>{{ item.user.profile.get_position }} ({{ item.user.profile.get_departament_abbreviation }})</td>
+                <td>{{ item.user.profile.get_name_and_departament }}</td>
                 <td>{{ item.get_working_hours }}</td>
                 <td>{{ item.get_processing }}</td>
                 <td>{{ item.get_defect }}</td>

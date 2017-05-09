@@ -2,7 +2,7 @@
     background: #333;
 }
 
-.object-tools a:hover {
+.object-tools a:hover, .object-tools a:active {
     background-color: #333;
 }
 

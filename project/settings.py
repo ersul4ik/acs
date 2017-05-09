@@ -9,6 +9,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 
+# ==================== LOGIN URL ==============================================
+LOGIN_URL = 'admin/login/'
+
+
 # ==================== SECURITY ===============================================
 SECRET_KEY = 'x_5-wa0^s6$z-u&wz)1bfcce9x^$n(qmfpch53tjre=-3_(za-'
 ALLOWED_HOSTS = ['*']

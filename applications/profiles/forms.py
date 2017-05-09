@@ -4,15 +4,14 @@ from django import forms
 from applications.profiles.models import Profile
 
 
-class FormProfile(forms.ModelForm):
+class Profile_form(forms.ModelForm):
+        class Meta():
+            model = Profile
+            fields = [
+            'first_name',
+            'last_name',
+            'position',
+            'birthday',
+            'image',
 
-    class Meta:
-        model = Profile
-        exclude = ('age',)
-        # fields = ('first_name', 'last_name')
-
-        # Стили полей,создание старта
-        widgets = {
-            'number_starts': forms.Textarea(attrs={'class': 'form-control', 'rows': '1'}),
-            'result': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
-        }
+    ]

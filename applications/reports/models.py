@@ -10,6 +10,7 @@ from django.db import models
 class AccountingAccess(models.Model):
     user = models.ForeignKey(User)
     coming = models.TimeField(verbose_name='Пришел в', blank=True, null=True)
+    coming = models.TimeField(verbose_name='Пришел в', auto_now_add=False)
     leaving = models.TimeField(verbose_name='Ушел в', blank=True, null=True)
     date = models.DateField(auto_now_add=True)
 

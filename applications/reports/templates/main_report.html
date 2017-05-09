@@ -14,13 +14,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for u in list %}
+            {% for item in user_list %}
             <tr>
-                <td>{{ u.user.profile.get_full_name }}</td>
-                <td>{{ u.user.profile.position.title }}</td>
-                <td>{{ u.coming }} - {{ u.leaving }}</td>
+                <td>{{ item.user.profile.get_full_name }}</td>
+                <td>{{ item.user.profile.position.title }}</td>
+                <td>{{ item.get_working_hours }}</td>
                 <td>Lorem.</td>
-                <td><a href="/profiles/profile.html">Редактировать</a></td>
+                <td><a href="{% url 'profile:view' item.user.pk %}">Редактировать</a></td>
             </tr>
             {%  endfor %}
             </tbody>

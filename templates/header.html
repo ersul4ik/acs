@@ -3,7 +3,7 @@
               <div class="container-fluid">
                 <div class="navbar-header">
                   <a class="navbar-brand" href="/">Access Control System</a>
-                  <p class="navbar-text">Администратор</p>
+                  <p class="navbar-text">{{ request.user.profile.get_position }}</p>
                 </div>
                   <ul class="nav navbar-nav navbar-right">
                       <form class="navbar-form navbar-left" role="search">
@@ -19,7 +19,7 @@
                       <ul class="dropdown-menu">
                         <li><a href="#">Отчеты</a></li>
                         <li><a href="#">Пользователи</a></li>
-                        <li><a href="#">Настройки</a></li>
+                        <li><a href="{% url 'profile:view' request.user.pk %}">Настройки</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Выйти</a></li>
                       </ul>

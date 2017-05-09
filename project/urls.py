@@ -10,7 +10,7 @@ from django.contrib import admin
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
-    url(r'^profiles/', include('applications.profiles.urls')),
+    url(r'^profiles/', include('applications.profiles.urls', namespace='profile')),
     url(r'^', include('applications.reports.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

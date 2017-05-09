@@ -6,5 +6,5 @@ from django.conf.urls import url
 from applications.profiles.views import profile_main
 
 urlpatterns = [
-    url(r'$', profile_main),
+    url(r'(?P<user_id>\d+)/$', profile_main, name='view'),
 ]

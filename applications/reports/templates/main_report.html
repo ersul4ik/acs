@@ -9,7 +9,8 @@
                 <th>Полное имя</th>
                 <th>Должность</th>
                 <th>Время работы (24:00)</th>
-                <th>Итого (час)</th>
+                <th>Переработка (час)</th>
+                <th>Недоработка (час)</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -17,10 +18,11 @@
             {% for item in user_list %}
             <tr>
                 <td>{{ item.user.profile.get_full_name }}</td>
-                <td>{{ item.user.profile.position.title }}</td>
+                <td>{{ item.user.profile.get_position }} ({{ item.user.profile.get_departament_abbreviation }})</td>
                 <td>{{ item.get_working_hours }}</td>
-                <td>Lorem.</td>
-                <td><a href="{% url 'profile:view' item.user.pk %}">Редактировать</a></td>
+                <td>{{ item.get_processing }}</td>
+                <td>{{ item.get_defect }}</td>
+                <td><a href="{% url 'profiles:edit' item.user.pk %}">Редактировать</a></td>
             </tr>
             {%  endfor %}
             </tbody>

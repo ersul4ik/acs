@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from applications.profiles.models import Profile
 
 
-def profile_main(request, user_id):
+def profile_edit(request, user_id):
     template = 'profile.html'
-    try:
-        user = Profile.objects.get(user__id=user_id)
-    except Profile.DoesNotExist:
-        return HttpResponse(status=404)
+    user = get_object_or_404(Profile, user__id=user_id)
     return render(request, template, {'user': user})
+
+
+def profile_list(request):
+    pass

@@ -10,6 +10,11 @@ DEBUG = True
 
 
 # ==================== LOGIN URL ==============================================
+SITE_HEADER = 'Access Control System'
+SITE_TITLE = SITE_HEADER
+
+
+# ==================== LOGIN URL ==============================================
 LOGIN_URL = 'admin/login/'
 
 
@@ -27,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'applications.administration',
     'applications.reports',
     'applications.profiles',
     'applications.infrastructure',
@@ -110,6 +116,8 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+
 # ==================== MEDIA ==================================================
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

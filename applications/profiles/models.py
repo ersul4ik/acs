@@ -35,6 +35,9 @@ class Profile(models.Model):
     def get_departament(self):
         return self.position.departament.title
 
+    def get_departament_abbreviation(self):
+        return self.position.departament.abbreviation
+
     def get_position(self):
         return self.position.title
 

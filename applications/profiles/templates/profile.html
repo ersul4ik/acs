@@ -8,49 +8,31 @@
                 <div class="thumbnail">
                     <img src="http://lorempixel.com/400/200" alt="...">
                 </div>
-                    Реактируешь пользователя: <br> {{ user.get_full_name }}
+                    Реактируешь пользователя: <br>
             </div>
             <div class="col-md-8">
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="col-md-3"><label for="">Имя</label></div>
-                        <div class="col-md-9"><input type="text" class="form-control" placeholder=""></div>
+                        <div class="col-md-9">{{ form.first_name }}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="col-md-3"><label for="">Фамилия</label></div>
-                        <div class="col-md-9"><input type="text" class="form-control" placeholder=""></div>
+                        <div class="col-md-9">{{ form.last_name }}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <div class="col-md-3"><label for="">Воздаст</label></div>
-                        <div class="col-md-9"><input type="number" class="form-control" placeholder=""></div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-3"><label for="">Отдел</label></div>
-                        <div class="col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
-                        </div>
+                        <div class="co]l-md-3"><label for="">Дата рождения</label></div>
+                            <div class="col-md-9">{{ form.birthday }}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="col-md-3"><label for="">Должность</label></div>
-                        <div class="col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
-                        </div>
+                        <div class="col-md-9">{{ form.position }}</div>
                     </div>
                 </div>
                 <div class="row">

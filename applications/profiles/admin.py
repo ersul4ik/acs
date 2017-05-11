@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import CheckboxSelectMultiple
@@ -19,12 +21,14 @@ class WorkPeriodInline(admin.StackedInline):
     extra = 1
 
 
-class UserAdmin(admin.ModelAdmin):
-    exclude = ('first_name', 'last_name', 'user_permissions', 'password', 'is_active')
+class CustomUserAdmin(UserAdmin):
+    add_form = UserCreationForm
+    # fields = ('username', 'password1', 'password2')
+    # exclude = ('first_name', 'last_name', 'user_permissions', 'password', 'is_active')
     inlines = [ProfileInline, WorkPeriodInline]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
 admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+admin.site.register(User, CustomUserAdmin)

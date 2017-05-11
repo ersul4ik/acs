@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 from applications.infrastructure.models import Departament, Position
 
-
 GENDER_CHOICES = (
     ('М', 'Мужской'),
     ('F', 'Женский'),
@@ -46,7 +45,10 @@ class Profile(models.Model):
         return self.position.title
 
     def get_name_and_departament(self):
-        return '{}{}'.format(self.get_full_name(), ' ({})'.format(self.get_departament_abbreviation()) or '')
+        d = ''
+        if self.get_departament_abbreviation():
+            d = ' ({})'.format(self.get_departament_abbreviation())
+        return '{}{}'.format(self.get_full_name(), d)
 
 
 class WorkPeriod(models.Model):

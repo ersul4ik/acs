@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404
-from applications.profiles.forms import FormProfile
+from django.contrib import auth
+from django.shortcuts import render, get_object_or_404, redirect
+
+from applications.profiles.forms import FormProfile, FormLogin
 from applications.profiles.models import Profile
 
 
@@ -25,4 +27,16 @@ def profile_main(request, user_id):
 
 def user_login(request):
     template = 'login.html'
-    return render(request, template)
+    form = FormLogin(data=request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            # Правильный пароль и пользователь "активен"
+            auth.login(request, form.get_user())
+            # Перенаправление на "правильную" страницу
+            return redirect(request.GET.get('next'))
+    return render(request, template, {'form': form})
+
+
+def user_logout(request):
+    auth.logout(request)
+    return redirect('profiles:user_login')

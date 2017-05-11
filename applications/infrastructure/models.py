@@ -27,4 +27,4 @@ class Position(models.Model):
         verbose_name_plural = 'Должности'
 
     def __unicode__(self):
-        return '{} ({})'.format(self.title, self.departament.title)
+        return '{} ({})'.format(self.title, self.departament.abbreviation)

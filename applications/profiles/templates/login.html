@@ -8,16 +8,18 @@
                     <h3 class="panel-title">Access Control System</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="POST">
+                        {% csrf_token %}
                         <div class="form-group ">
                             <div class="col-md-8 col-md-offset-2">
-                                <input type="email" class="form-control" id="inputEmail3"
-                                       placeholder="Имя пользователя">
+                                {{ form.username }}
+                                {{ form.username.errors }}
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Пароль">
+                                {{ form.password }}
+                                {{ form.password.errors }}
                             </div>
                         </div>
                         <div class="form-group">

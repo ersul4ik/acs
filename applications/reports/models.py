@@ -8,15 +8,17 @@ from django.db import models
 
 
 class AccountingAccess(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='working_time')
     coming = models.TimeField(verbose_name='Пришел в', blank=True, null=True)
-    coming = models.TimeField(verbose_name='Пришел в', auto_now_add=False)
     leaving = models.TimeField(verbose_name='Ушел в', blank=True, null=True)
     date = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Рабочее время'
         verbose_name_plural = 'Рабочее время'
+
+    def __unicode__(self):
+        return '{} ({})'.format(self.user.profile.get_full_name(), self.date)
 
     def get_working_hours(self):
         if self.coming:

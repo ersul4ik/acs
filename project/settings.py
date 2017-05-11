@@ -15,7 +15,7 @@ SITE_TITLE = SITE_HEADER
 
 
 # ==================== LOGIN URL ==============================================
-LOGIN_URL = 'admin/login/'
+LOGIN_URL = '/profiles/login/'
 
 
 # ==================== SECURITY ===============================================

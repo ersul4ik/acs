@@ -3,12 +3,16 @@
 {% block body %}
 
     <div class="container jumbotron"> <!-- main block -->
-        <form action="" class="form-horizontal">
+        <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="col-md-4">
                 <div class="thumbnail">
-                    <img src="http://lorempixel.com/400/200" alt="...">
+                    {% if profile.image %}
+                    <img src="{{ profile.image.url }}" alt="{{ profile.image.url }}">
+                    {% else %}
+                    {{ form.image }}
+                    {% endif %}
                 </div>
-                    Реактируешь пользователя: <br>
             </div>
             <div class="col-md-8">
                 <div class="col-md-6">

@@ -5,6 +5,6 @@ from django.conf.urls import url
 
 from applications.reports.views import report_main
 
-urlpatterns = [
-    url(r'$', report_main, name='list'),
-]
+# urlpatterns = [
+#     url(r'$', report_main, name='list'),
+# ]

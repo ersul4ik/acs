@@ -8,21 +8,24 @@
             <tr>
                 <th>Полное имя</th>
                 <th>Должность</th>
+                <th>Отдел</th>
                 <th>Время работы (24:00)</th>
                 <th>Переработка (час)</th>
                 <th>Недоработка (час)</th>
-                <th>Действия</th>
+               <!-- <th>Действия</th>-->
             </tr>
             </thead>
             <tbody>
             {% for item in user_list %}
             <tr>
-                <td>{{ item.user.profile.get_full_name }}</td>
-                <td>{{ item.user.profile.get_name_and_departament }}</td>
+                <td><a href="{% url 'profiles:edit' item.user.pk %}">{{ item.user.profile.get_full_name }}</a></td>
+                <!--<td>{{ item.user.profile.get_name_and_departament }}</td>-->
+                <td>{{ item.user.profile.get_position}}</td>
+                <td>{{ item.user.profile.get_departament_abbreviation }}</td>
                 <td>{{ item.get_working_hours }}</td>
                 <td>{{ item.get_processing }}</td>
                 <td>{{ item.get_defect }}</td>
-                <td><a href="{% url 'profiles:edit' item.user.pk %}">Редактировать</a></td>
+              <!--<td><a href="{% url 'profiles:edit' item.user.pk %}">Редактировать</a></td>-->
 
             </tr>
             {%  endfor %}

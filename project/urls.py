@@ -13,12 +13,11 @@ urlpatterns = [
     url(r'^profiles/', include('applications.profiles.urls', namespace='profiles')),
     # url(r'^reports/', include('applications.reports.urls', namespace='reports')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'coupons_apps.common.views.page_not_found'
-handler500 = 'coupons_apps.common.views.server_error'
+handler404 = 'applications.administration.views.page_not_found'
+handler500 = 'applications.administration.views.server_error'
 
 urlpatterns += (
-    url(r'$', report_main, name='home_page'),
+    url(r'^$', report_main, name='home_page'),
 )

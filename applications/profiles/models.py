@@ -18,13 +18,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, verbose_name='Пользователь')
     first_name = models.CharField(max_length=15, verbose_name='Имя')
     last_name = models.CharField(max_length=30, verbose_name='Фамилия')
-    position = models.ForeignKey(Position, verbose_name='Должность')
+    position = models.ForeignKey(Position, verbose_name='Должность', null=True)
     gender = models.CharField(max_length=2, verbose_name='Пол', choices=GENDER_CHOICES)
     phone = models.CharField(max_length=15, verbose_name='Телефон')
-    home_phone = models.CharField(max_length=15, verbose_name='Домашний телефон', blank=True, null=False)
+    home_phone = models.CharField(max_length=15, verbose_name='Домашний телефон', blank=True, null=True)
     address = models.CharField(max_length=50, verbose_name='Адрес')
     image = models.ImageField(blank=True, null=True, verbose_name='Фотография')
-    birthday = models.DateField(verbose_name='Дата рождения')
+    birthday = models.DateField(verbose_name='Дата рождения', null=True)
     active = models.BooleanField(verbose_name='Активен', default=False)
 
     class Meta:

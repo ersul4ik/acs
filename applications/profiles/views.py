@@ -26,27 +26,32 @@ def login(request):
 
 @login_required
 def user_list(request):
-    pass
+    template = 'users_list.html'
+    profiles_list = Profile.objects.filter()
+    return render(request, template, {'profiles': profiles_list})
 
 
 @login_required
 def create_user(request):
-    pass
+    template = 'user/create_user.html'
+    return render(request, template)
 
 
 @login_required
 def view_user(request, username):
+    template = 'user_view.html'
     profile = get_object_or_404(Profile, user__username=username)
-    pass
+    return render(request, template)
 
 
 @login_required
 def change_user(request, username):
+    template = 'user/change_user.html'
     profile = get_object_or_404(Profile, user__username=username)
     form = FormProfile(request.POST or None, request.FILES or None, instance=profile)
     if request.method == 'POST':
         form.save()
-    return render(request, 'profile.html', {
+    return render(request, template, {
         'form': form,
         'profile': profile,
     })
@@ -54,11 +59,13 @@ def change_user(request, username):
 
 @login_required
 def change_password(request, username):
+    template = 'user/change_password.html'
     profile = get_object_or_404(Profile, user__username=username)
-    pass
+    return render(request, template)
 
 
 @login_required
 def change_permissions(request, username):
+    template = 'user/change_permissions.html'
     profile = get_object_or_404(Profile, user__username=username)
-    pass
+    return render(request, template)

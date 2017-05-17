@@ -8,10 +8,6 @@ from django.contrib.auth.models import User
 from applications.profiles.models import Profile
 
 
-class DateTypeInput(forms.DateInput):
-    input_type = 'date'
-
-
 class FormProfile(forms.ModelForm):
     class Meta:
         model = Profile
@@ -30,22 +26,22 @@ class FormProfile(forms.ModelForm):
 
 
 class FormLogin(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(
-        attrs={
-            'placeholder': 'Имя пользователя',
-            'class': 'form-group'
-        }
-    ))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={
-            'placeholder': 'Пароль',
-            'class': 'form-group'
-        }
-    ))
-
     class Meta:
         model = User
         fields = (
             'username',
             'password',
         )
+
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Имя пользователя',
+            'class': 'form-control'
+        }
+    ))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'placeholder': 'Пароль',
+            'class': 'form-control'
+        }
+    ))

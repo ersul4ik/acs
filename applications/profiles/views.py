@@ -9,9 +9,40 @@ from applications.profiles.forms import FormProfile, FormLogin
 from applications.profiles.models import Profile
 
 
+def logout(request):
+    auth.logout(request)
+    return redirect('profiles:user_login')
+
+
+def login(request):
+    template = 'login.html'
+    form = FormLogin(data=request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            auth.login(request, form.get_user())
+            return redirect(request.GET.get('next') or '/')
+    return render(request, template, {'form': form})
+
+
 @login_required
-def profile_edit(request, user_id):
-    profile = get_object_or_404(Profile, user__id=user_id)
+def user_list(request):
+    pass
+
+
+@login_required
+def create_user(request):
+    pass
+
+
+@login_required
+def view_user(request, username):
+    profile = get_object_or_404(Profile, user__username=username)
+    pass
+
+
+@login_required
+def change_user(request, username):
+    profile = get_object_or_404(Profile, user__username=username)
     form = FormProfile(request.POST or None, request.FILES or None, instance=profile)
     if request.method == 'POST':
         form.save()
@@ -22,22 +53,12 @@ def profile_edit(request, user_id):
 
 
 @login_required
-def profile_main(request, user_id):
-    template = 'profile.html'
-    user = Profile.objects.get(user__id=user_id)
-    return render(request, template, {'user': user})
+def change_password(request, username):
+    profile = get_object_or_404(Profile, user__username=username)
+    pass
 
 
-def user_login(request):
-    template = 'login.html'
-    form = FormLogin(data=request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            auth.login(request, form.get_user())
-            return redirect(request.GET.get('next') or '/')
-    return render(request, template, {'form': form})
-
-
-def user_logout(request):
-    auth.logout(request)
-    return redirect('profiles:user_login')
+@login_required
+def change_permissions(request, username):
+    profile = get_object_or_404(Profile, user__username=username)
+    pass

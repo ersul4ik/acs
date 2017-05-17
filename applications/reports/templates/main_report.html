@@ -22,7 +22,7 @@
                 <td>{{ item.get_working_hours }}</td>
                 <td>{{ item.get_processing }}</td>
                 <td>{{ item.get_defect }}</td>
-                <td><a href="{% url 'profiles:edit' item.user.pk %}">Редактировать</a></td>
+                <td><a href="{% url 'profiles:change_user' item.user.username %}">Редактировать</a></td>
 
             </tr>
             {%  endfor %}
@@ -41,6 +41,5 @@
             <li><a href="#">8</a></li>
             <li><a href="#">&raquo;</a></li>
         </ul>
-    </div>
     </div>
 {% endblock %}

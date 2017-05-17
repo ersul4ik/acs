@@ -19,13 +19,13 @@
                        data-toggle="dropdown">{{ request.user.profile.get_name_and_departament }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         {#                        <li><a href="{% url 'reports:list' %}">Отчеты</a></li>#}
-                        <li><a href="{% url 'profiles:list' %}">Пользователи</a></li>
-                        <li><a href="{% url 'profiles:edit' request.user.pk %}">Настройки</a></li>
+                        <li><a href="{% url 'profiles:user_list' %}">Пользователи</a></li>
+                        <li><a href="{% url 'profiles:change_user' request.user.username %}">Настройки</a></li>
                         {% if request.user.is_superuser %}
                             <li><a href="{% url 'admin:index' %}">Администрирование</a></li>
                         {% endif %}
                         <li class="divider"></li>
-                        <li><a href="{% url 'profiles:user_logout' %}">Выйти</a></li>
+                        <li><a href="{% url 'profiles:logout' %}">Выйти</a></li>
                     </ul>
                 </li>
             </ul>

@@ -11,7 +11,7 @@ from applications.profiles.models import Profile
 
 def logout(request):
     auth.logout(request)
-    return redirect('profiles:user_login')
+    return redirect('profiles:login')
 
 
 def login(request):

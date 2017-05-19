@@ -6,11 +6,11 @@
                 <p class="navbar-text">{{ request.user.profile.get_position }}</p>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-left" role="search" action="{% url 'home_page' %}" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder='Имя сотрудника'>
+                        <input type="text" class="form-control" placeholder='Имя сотрудника' name="username">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default">Найти</button>
+                            <button type="submit" class="btn btn-default" name="header_search">Найти</button>
                           </span>
                     </div>
                 </form>

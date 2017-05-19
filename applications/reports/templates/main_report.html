@@ -12,6 +12,7 @@
                 <th>Время работы (24:00)</th>
                 <th>Переработка (час)</th>
                 <th>Недоработка (час)</th>
+                <th>Дата</th>
             </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                 <td>{{ item.get_working_hours }}</td>
                 <td>{{ item.get_processing }}</td>
                 <td>{{ item.get_defect }}</td>
+                <td>{{ item.date }}</td>
             </tr>
             {%  endfor %}
             </tbody>

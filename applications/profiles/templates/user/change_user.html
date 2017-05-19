@@ -8,7 +8,7 @@
             <div class="col-md-4 col-md-offset-1">
                 <div class="thumbnail">
                     {% if profile.image  %}
-                    <img src="{{ profile.image.url }}" alt="{{ profile.image.url }}">
+                    <img src="{{ profile.image.url }}" alt="{{ profile.image.url }}"height="100" width="180">
                     {% else %}
                     {{ form.image }}
                     {% endif %}

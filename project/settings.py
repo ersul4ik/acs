@@ -9,14 +9,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 
-# ==================== LOGIN URL ==============================================
+# ==================== LOGIN ==============================================
 SITE_HEADER = 'Access Control System'
 SITE_TITLE = SITE_HEADER
-
-
-# ==================== LOGIN URL ==============================================
 LOGIN_URL = '/profiles/login/'
-
+AUTH_USER_MODEL = 'profiles.User'
 
 # ==================== SECURITY ===============================================
 SECRET_KEY = 'x_5-wa0^s6$z-u&wz)1bfcce9x^$n(qmfpch53tjre=-3_(za-'

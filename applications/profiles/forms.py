@@ -12,14 +12,11 @@ class FormProfile(forms.ModelForm):
     class Meta:
         model = Profile
         fields = (
-            'first_name',
-            'last_name',
+            # 'first_name',
             'position',
             'birthday',
         )
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'position': forms.Select(attrs={'class': 'form-control'}),
             'birthday': forms.DateInput(attrs={'class': 'form-control'}),
         }

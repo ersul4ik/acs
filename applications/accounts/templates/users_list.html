@@ -1,25 +1,25 @@
 {% extends 'layout.html' %}
-<div class="filters col-md-10 col-md-offset-1 well"> <!-- filter block -->
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="date" class="form-control" name="first_date">
-                </div>
-                -
-                <div class="form-group">
-                    <input type="date" class="form-control" name="last_date">
-                </div>
-                <div class="form-group">
-                    <label for=""></label>
-                    <select name="" class="form-control">
-                        <option value="">КЦ</option>
-                        <option value="">ЦУС</option>
-                        <option value="">IT</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Найти</button>
-            </form>
-        </div>
-    </div>{% block body %}
+{% block body %}
+
+    <div class="content col-md-10 col-md-offset-1"> <!-- main block -->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Полное имя</th>
+                <th>Должность</th>
+                <th>Отдел</th>
+            </tr>
+            </thead>
+            <tbody>
+           <tbody>
+        {% for item in user_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'profiles:change_user' item.user.username %}">{{ item.user.profile.get_full_name }}</a>
+                </td>
+                <td>{{ item.user.profile.get_position }}</td>
+                <td>{{ item.user.profile.get_departament_abbreviation }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
 {% endblock %}

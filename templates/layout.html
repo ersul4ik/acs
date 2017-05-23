@@ -11,9 +11,7 @@
 </head>
 <body>
     <div class="container-fluid">
-    {% if request.user.is_authenticated %}
-        {% include 'header.html' %}
-    {% endif %}
+        {% block header %}{% include 'header.html' %}{% endblock %}
         <div class="main-container"> <!-- main block -->
             {% block body %}{% endblock %}
         </div> <!-- main block -->

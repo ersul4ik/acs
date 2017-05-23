@@ -5,13 +5,13 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from applications.profiles.forms import FormProfile, FormLogin
-from applications.profiles.models import Profile
+from applications.accounts.forms import FormProfile, FormLogin
+from applications.accounts.models import User
 
 
 def logout(request):
     auth.logout(request)
-    return redirect('profiles:login')
+    return redirect('accounts:login')
 
 
 def login(request):
@@ -27,8 +27,8 @@ def login(request):
 @login_required
 def user_list(request):
     template = 'users_list.html'
-    profiles_list = Profile.objects.filter()
-    return render(request, template, {'profiles': profiles_list})
+    user_list = User.objects.filter()
+    return render(request, template, {'users': user_list})
 
 
 @login_required
@@ -40,32 +40,32 @@ def create_user(request):
 @login_required
 def view_user(request, username):
     template = 'user_view.html'
-    profile = get_object_or_404(Profile, user__username=username)
+    user = get_object_or_404(User, username=username)
     return render(request, template)
 
 
 @login_required
 def change_user(request, username):
     template = 'user/change_user.html'
-    profile = get_object_or_404(Profile, user__username=username)
-    form = FormProfile(request.POST or None, request.FILES or None, instance=profile)
+    user = get_object_or_404(User, username=username)
+    form = FormProfile(request.POST or None, request.FILES or None, instance=user)
     if request.method == 'POST':
         form.save()
     return render(request, template, {
         'form': form,
-        'profile': profile,
+        'user': user,
     })
 
 
 @login_required
 def change_password(request, username):
     template = 'user/change_password.html'
-    profile = get_object_or_404(Profile, user__username=username)
+    user = get_object_or_404(User, username=username)
     return render(request, template)
 
 
 @login_required
 def change_permissions(request, username):
     template = 'user/change_permissions.html'
-    profile = get_object_or_404(Profile, user__username=username)
+    user = get_object_or_404(User, username=username)
     return render(request, template)

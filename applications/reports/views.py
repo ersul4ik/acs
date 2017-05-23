@@ -13,7 +13,7 @@ from applications.reports.models import AccountingAccess
 def report_main(request):
     template = 'main_report.html'
     if 'header_search' in request.GET:
-        access_list = AccountingAccess.objects.filter(user__profile__first_name__contains=request.GET.get('username'))
+        access_list = AccountingAccess.objects.filter(user__first_name__contains=request.GET.get('username'))
     elif 'form_search' in request.GET:
         today = datetime.today()
         first_date = request.GET.get('first_date') or datetime.strftime(today, '%Y-%m-01')

@@ -3,20 +3,20 @@
 {% block body %}
     {% include 'filters.html' %}
     <div class="content col-md-10 col-md-offset-1"> <!-- main block -->
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>Полное имя</th>
-                <th>Должность</th>
-                <th>Отдел</th>
-                <th>Время работы (24:00)</th>
-                <th>Переработка (час)</th>
-                <th>Недоработка (час)</th>
-                <th>Дата</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in user_list %}
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Полное имя</th>
+            <th>Должность</th>
+            <th>Отдел</th>
+            <th>Время работы (24:00)</th>
+            <th>Переработка (час)</th>
+            <th>Недоработка (час)</th>
+            <th>Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in user_list %}
             <tr>
                 <td><a href="{% url 'accounts:change_user' item.user.username %}">{% if item.user.get_full_name %}{{ item.user.get_full_name }}{% else %}{{ item.user.username }}{% endif %}</a></td>
                 <td>{{ item.user.get_position}}</td>
@@ -26,22 +26,31 @@
                 <td>{{ item.get_defect }}</td>
                 <td>{{ item.date }}</td>
             </tr>
-            {%  endfor %}
-
-            </tbody>
-        </table>
-        <ul class="pagination pagination-sm">
-            <li class="disabled"><span>&laquo;</span></li>
-            <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="large-3 large-offset-5 columns">
+            <ul class="pagination pagination-sm">
+                {% if user_list.has_previous %}
+                    <li class="arrow"><a href="{% url 'reports:reports_page' user_list.previous_page_number %}?{{ request.GET.urlencode }}">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in user_list.paginator.page_range %}
+                    {% if page == user_list.number %}
+                        <li class="active"><a href="{% url 'reports:reports_page' page %}?{{ request.GET.urlencode }}">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'reports:reports_page' page %}?{{ request.GET.urlencode }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if user_list.has_next %}
+                    <li class="arrow"><a href="{% url 'reports:reports_page' user_list.next_page_number %}?{{ request.GET.urlencode }}">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
     </div>
 {% endblock %}

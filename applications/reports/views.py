@@ -24,5 +24,5 @@ def report_main(request, page_number=1):
         accounting_list = AccountingAccess.objects.filter(date__range=[first_date, last_date])
     else:
         accounting_list = AccountingAccess.objects.filter(date=datetime.today())
-    paginator = Paginator(accounting_list.exclude(user__profile=None), 5)
+    paginator = Paginator(accounting_list, 5)
     return render(request, template, {'user_list': paginator.page(page_number)})

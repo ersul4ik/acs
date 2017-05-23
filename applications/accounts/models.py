@@ -22,8 +22,8 @@ class User(AbstractUser):
     birthday = models.DateField(verbose_name='Дата рождения', null=True)
 
     class Meta:
-        verbose_name = 'Профайл'
-        verbose_name_plural = 'Профайлы'
+        verbose_name = 'Аккаунт'
+        verbose_name_plural = 'Аккаунты'
 
     def __unicode__(self):
         return self.get_full_name()
@@ -56,9 +56,3 @@ class WorkPeriod(models.Model):
 
     def __unicode__(self):
         return '{} | dismissed: {}'.format(self.username, self.dismissed)
-
-
-# @receiver(post_save, sender=User)
-# def create_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.get_or_create(user=instance)

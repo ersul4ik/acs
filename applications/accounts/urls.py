@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
-from applications.profiles import views
+from applications.accounts import views
 
 urlpatterns = [
     url(r'logout/$', views.logout, name='logout'),

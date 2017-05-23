@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="{% url 'home_page' %}">Access Control System</a>
-                <p class="navbar-text">{{ request.user.profile.get_position }}</p>
+                <p class="navbar-text">{{ request.user.get_position }}</p>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <form class="navbar-form navbar-left" role="search" action="{% url 'home_page' %}" method="get">
@@ -16,16 +16,16 @@
                 </form>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
-                       data-toggle="dropdown">{{ request.user.profile.get_name_and_departament }} <b class="caret"></b></a>
+                       data-toggle="dropdown">{{ request.user.get_name_and_departament }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         {#                        <li><a href="{% url 'reports:list' %}">Отчеты</a></li>#}
-                        <li><a href="{% url 'profiles:user_list' %}">Пользователи</a></li>
-                        <li><a href="{% url 'profiles:change_user' request.user.username %}">Настройки</a></li>
+                        <li><a href="{% url 'accounts:user_list' %}">Пользователи</a></li>
+                        <li><a href="{% url 'accounts:change_user' request.user.username %}">Настройки</a></li>
                         {% if request.user.is_superuser %}
                             <li><a href="{% url 'admin:index' %}">Администрирование</a></li>
                         {% endif %}
                         <li class="divider"></li>
-                        <li><a href="{% url 'profiles:logout' %}">Выйти</a></li>
+                        <li><a href="{% url 'accounts:logout' %}">Выйти</a></li>
                     </ul>
                 </li>
             </ul>

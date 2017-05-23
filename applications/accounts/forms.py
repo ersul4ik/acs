@@ -5,12 +5,12 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
-from applications.profiles.models import Profile
+from applications.accounts.models import User
 
 
 class FormProfile(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = User
         fields = (
             # 'first_name',
             'position',

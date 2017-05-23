@@ -18,9 +18,9 @@
             <tbody>
             {% for item in user_list %}
             <tr>
-                <td><a href="{% url 'profiles:change_user' item.user.username %}">{% if item.user.get_full_name %}{{ item.user.get_full_name }}{% else %}{{ item.user.username }}{% endif %}</a></td>
-                <td>{{ item.user.profile.get_position}}</td>
-                <td>{{ item.user.profile.get_departament_abbreviation }}</td>
+                <td><a href="{% url 'accounts:change_user' item.user.username %}">{% if item.user.get_full_name %}{{ item.user.get_full_name }}{% else %}{{ item.user.username }}{% endif %}</a></td>
+                <td>{{ item.user.get_position}}</td>
+                <td>{{ item.user.get_departament_abbreviation }}</td>
                 <td>{{ item.get_working_hours }}</td>
                 <td>{{ item.get_processing }}</td>
                 <td>{{ item.get_defect }}</td>

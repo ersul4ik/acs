@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 from datetime import datetime, date, timedelta
 
-from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 
 
 class AccountingAccess(models.Model):
-    user = models.ForeignKey(User, related_name='working_time')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='working_time')
     coming = models.TimeField(verbose_name='Пришел в', blank=True, null=True)
     leaving = models.TimeField(verbose_name='Ушел в', blank=True, null=True)
     date = models.DateField(verbose_name='Дата', default=timezone.now)

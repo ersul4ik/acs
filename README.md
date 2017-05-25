@@ -1,6 +1,7 @@
 # API
 
-####Создание пользователя
+#### Создание пользователя
+
 __request__
 ```
 [POST] http://<hostname>:<port>/accounts/api/create/
@@ -20,7 +21,9 @@ __response__
 | 3      | Не верный тип запроса           |
 
 
-Запрос на создание пользователя
+#### Фиксация времени
+
+__request__
 ```
 [POST] http://<hostname>:<port>/reports/api/commit/
 

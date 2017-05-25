@@ -99,6 +99,7 @@ def api_create_user(request):
         return HttpResponse(1)
 
     user.set_password(finger_id)
+    user.is_active = False
     user.save()
 
     return HttpResponse(0)

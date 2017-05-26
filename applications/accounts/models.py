@@ -13,35 +13,48 @@ GENDER_CHOICES = (
 
 
 class User(AbstractUser):
-    position = models.ForeignKey(Position, verbose_name='Должность', null=True)
-    gender = models.CharField(max_length=2, verbose_name='Пол', choices=GENDER_CHOICES)
-    phone = models.CharField(max_length=15, verbose_name='Телефон')
-    home_phone = models.CharField(max_length=15, verbose_name='Домашний телефон', blank=True, null=True)
-    address = models.CharField(max_length=50, verbose_name='Адрес')
-    photo = models.ImageField(blank=True, null=True, verbose_name='Фотография', upload_to='media/photo')
+    position = models.ForeignKey(verbose_name='Должность', to=Position, null=True)
+    gender = models.CharField(verbose_name='Пол', max_length=2, choices=GENDER_CHOICES, null=True)
+    phone = models.CharField(verbose_name='Телефон', max_length=15, null=True)
+    home_phone = models.CharField(verbose_name='Домашний телефон', max_length=15, blank=True, null=True)
+    address = models.CharField(verbose_name='Адрес', max_length=50, null=True)
+    photo = models.ImageField(verbose_name='Фотография', upload_to='media/photo', blank=True, null=True)
     birthday = models.DateField(verbose_name='Дата рождения', null=True)
+    id_finger = models.CharField(verbose_name='ID пальца', max_length=20, unique=True, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Аккаунт'
         verbose_name_plural = 'Аккаунты'
 
     def __unicode__(self):
-        return self.get_full_name()
+        return self.get_full_name() or self.username
+
+    def get_full_name(self):
+        return super(User, self).get_full_name()
+
+    get_full_name.short_description = 'Полное имя пользователя'
+
+    def get_departament_title(self):
+        return self.position.departament.title if self.position else ''
 
     def get_departament(self):
-        return self.position.departament.title if self.position else ''
+        return self.position.departament if self.position else None
 
     def get_departament_abbreviation(self):
         return self.position.departament.abbreviation if self.position else ''
 
-    def get_position(self):
+    def get_position_title(self):
         return self.position.title if self.position else ''
+
+    get_position_title.short_description = 'Должность'
 
     def get_name_and_departament(self):
         d = ''
         if self.get_departament_abbreviation():
             d = ' ({})'.format(self.get_departament_abbreviation())
         return '{}{}'.format(self.get_full_name() or self.username, d)
+
+    get_departament_title.short_description = 'Отдел'
 
 
 class WorkPeriod(models.Model):

@@ -16,8 +16,8 @@ class WorkPeriodInline(admin.StackedInline):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'get_full_name', 'gender',
-                    'id_finger', 'get_position',
-                    'get_departament', 'phone')
+                    'id_finger', 'get_position_title',
+                    'get_departament_title', 'phone', 'is_active')
     inlines = [WorkPeriodInline, ]
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},

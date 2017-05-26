@@ -34,16 +34,19 @@ class User(AbstractUser):
 
     get_full_name.short_description = 'Полное имя пользователя'
 
-    def get_departament(self):
+    def get_departament_title(self):
         return self.position.departament.title if self.position else ''
+
+    def get_departament(self):
+        return self.position.departament if self.position else None
 
     def get_departament_abbreviation(self):
         return self.position.departament.abbreviation if self.position else ''
 
-    def get_position(self):
+    def get_position_title(self):
         return self.position.title if self.position else ''
 
-    get_position.short_description = 'Должность'
+    get_position_title.short_description = 'Должность'
 
     def get_name_and_departament(self):
         d = ''
@@ -51,7 +54,7 @@ class User(AbstractUser):
             d = ' ({})'.format(self.get_departament_abbreviation())
         return '{}{}'.format(self.get_full_name() or self.username, d)
 
-    get_departament.short_description = 'Отдел'
+    get_departament_title.short_description = 'Отдел'
 
 
 class WorkPeriod(models.Model):

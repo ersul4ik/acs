@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from applications.accounts.forms import FormProfile, FormLogin
+from applications.accounts.forms import FormProfile, FormLogin, FormCreateAccount
 from applications.accounts.models import User
 
 
@@ -29,14 +29,27 @@ def login(request):
 @login_required
 def user_list(request):
     template = 'users_list.html'
-    user_list = User.objects.filter()
-    return render(request, template, {'users': user_list})
+    if request.user.is_superuser:
+        users = User.objects.all()
+    else:
+        users = User.objects.filter(
+            is_active=True, position__departament=request.user.get_departament()
+        ).exclude(position__departament=None).exclude(username=None)
+    return render(request, template, {'user_list': users.order_by('-date_joined')})
 
 
 @login_required
 def create_user(request):
     template = 'user/create_user.html'
-    return render(request, template)
+    form = FormCreateAccount(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.is_active = form.cleaned_data['is_active']
+            user.is_staff = form.cleaned_data['is_staff']
+            user.save()
+    return render(request, template, {'form': form})
 
 
 @login_required

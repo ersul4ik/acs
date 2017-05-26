@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, date
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
@@ -18,7 +19,10 @@ from applications.reports.models import AccountingAccess
 def report_main(request, page_number=1):
     template = 'main_report.html'
     if 'header_search' in request.GET:
-        accounting_list = AccountingAccess.objects.filter(user__first_name__contains=request.GET.get('username'))
+        accounting_list = AccountingAccess.objects.filter(
+            Q(user__first_name__contains=request.GET.get('username')) |
+            Q(user__username__contains=request.GET.get('username'))
+        )
     elif 'form_search' in request.GET:
         today = datetime.today()
         first_date = request.GET.get('first_date') or datetime.strftime(today, '%Y-%m-01')
@@ -28,7 +32,7 @@ def report_main(request, page_number=1):
         accounting_list = AccountingAccess.objects.filter(date__range=[first_date, last_date])
     else:
         accounting_list = AccountingAccess.objects.filter(date=datetime.today())
-    paginator = Paginator(accounting_list, 5)
+    paginator = Paginator(accounting_list, 15)
     return render(request, template, {'user_list': paginator.page(page_number)})
 
 

@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.decorators.csrf import csrf_exempt
 
 from applications.accounts.forms import FormProfile, FormLogin, FormCreateAccount
 from applications.accounts.models import User
@@ -84,35 +82,3 @@ def change_permissions(request, username):
     template = 'user/change_permissions.html'
     user = get_object_or_404(User, username=username)
     return render(request, template)
-
-
-@csrf_exempt
-def api_create_user(request):
-    """
-    :request:
-        finger_id
-
-    :response:
-        0 - Пользователь успешно создан
-        1 - Такой пользователь уже есть
-        2 - Не корректные параметры запроса
-        3 - Не верный тип запроса
-    """
-
-    if request.method != 'POST':
-        return HttpResponse(3)
-    finger_id = request.POST.get('finger_id')
-
-    if not finger_id:
-        return HttpResponse(2)
-
-    user, create = User.objects.get_or_create(id_finger=finger_id, username=finger_id)
-
-    if not create:
-        return HttpResponse(1)
-
-    user.set_password(finger_id)
-    user.is_active = False
-    user.save()
-
-    return HttpResponse(0)

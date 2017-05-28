@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
-from applications.reports import views
+from applications.api import views
 
 urlpatterns = [
-    url(r'(\d+)/$', views.report_main, name='reports_page'),
+    url(r'account/$', views.account_management, name='api_commit_time'),
 ]

@@ -10,6 +10,7 @@ from applications.reports.views import report_main
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api/', include('applications.api.urls', namespace='api')),
     url(r'^accounts/', include('applications.accounts.urls', namespace='accounts')),
     url(r'^reports/', include('applications.reports.urls', namespace='reports')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

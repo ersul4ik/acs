@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name='user',
+            name='administrate',
             options={'verbose_name': '\u0410\u043a\u043a\u0430\u0443\u043d\u0442', 'verbose_name_plural': '\u0410\u043a\u043a\u0430\u0443\u043d\u0442\u044b'},
         ),
     ]

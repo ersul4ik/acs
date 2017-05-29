@@ -9,7 +9,7 @@ __URL__
 #### Создание пользователя
 
 __request__
-```json
+```
 {
   'finger_id': '<id_пальца>',
   'method': 'enroll'
@@ -31,7 +31,7 @@ __response__
 #### Фиксация времени прихода/ухода
 
 __request__
-```json
+```
 {
   'finger_id': '<id_пальца>',
   'method': 'fix'

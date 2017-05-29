@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('coming', models.TimeField(blank=True, null=True, verbose_name='\u041f\u0440\u0438\u0448\u0435\u043b \u0432')),
                 ('leaving', models.TimeField(blank=True, null=True, verbose_name='\u0423\u0448\u0435\u043b \u0432')),
                 ('date', models.DateField(default=django.utils.timezone.now, verbose_name='\u0414\u0430\u0442\u0430')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='working_time', to=settings.AUTH_USER_MODEL)),
+                ('administrate', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='working_time', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': '\u0420\u0430\u0431\u043e\u0447\u0435\u0435 \u0432\u0440\u0435\u043c\u044f',

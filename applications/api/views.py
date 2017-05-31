@@ -35,7 +35,7 @@ def account_management(request):
         return HttpResponse(4)
 
     method = request.POST.get('method')
-    finger_id = request.POST.get('user_id')
+    finger_id = request.POST.get('finger_id')
 
     if method == 'fix':
         if not finger_id:
@@ -47,19 +47,19 @@ def account_management(request):
             return HttpResponse(1)
 
         access, create = AccountingAccess.objects.get_or_create(user=user, date=datetime.today())
+        time = timezone.now()
 
         if not create:
             delay = datetime.combine(date.today(), access.coming) + timedelta(hours=1)
             if datetime.now() < delay:
                 return HttpResponse(2)
             elif not access.leaving:
-                access.leaving = timezone.now()
+                access.leaving = datetime.strftime(time, '%H:%M:%S')
                 access.save()
                 return HttpResponse(0)
             else:
                 return HttpResponse(5)
-
-        access.coming = timezone.now()
+        access.coming = datetime.strftime(time, '%H:%M:%S')
         access.save()
         return HttpResponse(0)
     elif method == 'enroll':

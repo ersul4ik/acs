@@ -16,6 +16,8 @@ def report_main(request, page_number=1):
     template = 'main_report.html'
     if 'header_search' in request.GET:
         accounting_list = AccountingAccess.objects.filter(
+            user__position__departament=request.user.get_departament()
+        ).filter(
             Q(user__first_name__contains=request.GET.get('username')) |
             Q(user__username__contains=request.GET.get('username'))
         )

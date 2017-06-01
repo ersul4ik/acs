@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from applications.accounts.forms import FormProfile, FormLogin, FormCreateAccount
+from applications.accounts.forms import FormProfile, FormLogin
 from applications.accounts.models import User
 
 
@@ -37,29 +37,8 @@ def user_list(request):
 
 
 @login_required
-def create_user(request):
-    template = 'administrate/create_user.html'
-    form = FormCreateAccount(request.POST or None, request.FILES or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.is_active = form.cleaned_data['is_active']
-            user.is_staff = form.cleaned_data['is_staff']
-            user.save()
-    return render(request, template, {'form': form})
-
-
-@login_required
-def view_user(request, username):
-    template = 'account_view.html'
-    user = get_object_or_404(User, username=username)
-    return render(request, template)
-
-
-@login_required
 def change_user(request, username):
-    template = 'administrate/change_user.html'
+    template = 'account_view.html'
     user = get_object_or_404(User, username=username)
     form = FormProfile(request.POST or None, request.FILES or None, instance=user)
     if request.method == 'POST':
@@ -68,17 +47,3 @@ def change_user(request, username):
         'form': form,
         'administrate': user,
     })
-
-
-@login_required
-def change_password(request, username):
-    template = 'administrate/change_password.html'
-    user = get_object_or_404(User, username=username)
-    return render(request, template)
-
-
-@login_required
-def change_permissions(request, username):
-    template = 'administrate/change_permissions.html'
-    user = get_object_or_404(User, username=username)
-    return render(request, template)

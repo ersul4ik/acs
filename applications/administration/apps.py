@@ -1,9 +1,0 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from django.apps import AppConfig
-
-
-class AdministrationConfig(AppConfig):
-    name = 'applications.administration'
-    verbose_name = 'Администрирование'

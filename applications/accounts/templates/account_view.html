@@ -1,4 +1,76 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+
+    <div class="container jumbotron"> <!-- main block -->
+        <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-4 col-md-offset-1">
+                <div class="thumbnail">
+                    {% if user.photo %}
+                        <img src="{{ user.photo.url }}" alt="{{ user.photo.url }}">
+                    {% else %}
+                        <img src="/media/default_media/user_avatar.jpg">
+                    {% endif %}
+                    {{ form.photo.errors }}
+                    {{ form.photo }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Имя</label></div>
+                        <div class="col-md-9">{{ form.first_name }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Фамилия</label></div>
+                        <div class="col-md-9">{{ form.last_name }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Телефон</label></div>
+                        <div class="col-md-9">{{ form.phone }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Домашний телефон</label></div>
+                        <div class="col-md-9">{{ form.home_phone }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Пол</label></div>
+                        <div class="col-md-9">{{ form.gender }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Арес</label></div>
+                        <div class="col-md-9">{{ form.address }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Дата рождения</label></div>
+                            <div class="col-md-9">{{ form.birthday }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3"><label for="">Должность</label></div>
+                        <div class="col-md-9">{{ form.position }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-9">
+                        <button class="btn btn-primary btn-block" type="submit">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> <!-- main block -->
 {% endblock %}

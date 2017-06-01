@@ -2,12 +2,12 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from applications.accounts.models import User
 
 
-class FormProfile(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
@@ -33,7 +33,7 @@ class FormProfile(forms.ModelForm):
         }
 
 
-class FormLogin(AuthenticationForm):
+class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = (
@@ -53,3 +53,8 @@ class FormLogin(AuthenticationForm):
             'class': 'form-control'
         }
     ))
+
+
+class CustomUserChangeForm(UserChangeForm):
+    def clean(self):
+        pass

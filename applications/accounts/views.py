@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from applications.accounts.forms import FormProfile, FormLogin
+from applications.accounts.forms import ProfileForm, LoginForm
 from applications.accounts.models import User
 
 
@@ -16,7 +16,7 @@ def logout(request):
 
 def login(request):
     template = 'login.html'
-    form = FormLogin(data=request.POST or None)
+    form = LoginForm(data=request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             auth.login(request, form.get_user())
@@ -40,7 +40,7 @@ def user_list(request):
 def change_user(request, username):
     template = 'account_view.html'
     user = get_object_or_404(User, username=username)
-    form = FormProfile(request.POST or None, request.FILES or None, instance=user)
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=user)
     if request.method == 'POST':
         form.save()
     return render(request, template, {

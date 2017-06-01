@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import timedelta, date
+
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 
 from applications.accounts.models import User
 
@@ -32,6 +34,15 @@ class ProfileForm(forms.ModelForm):
             'birthday': forms.DateInput(attrs={'class': 'form-control'}),
         }
 
+    def clean(self):
+        cleaned_data = super(ProfileForm, self).clean()
+        birthday = cleaned_data.get('birthday')
+        minimum_age = date.today() - timedelta(weeks=4*12*18)
+
+        if minimum_age < birthday:
+            msg = 'Возраст пользователя не может быть младше 18 лет (%s)' % minimum_age
+            self.add_error('birthday', msg)
+
 
 class LoginForm(AuthenticationForm):
     class Meta:
@@ -57,4 +68,10 @@ class LoginForm(AuthenticationForm):
 
 class CustomUserChangeForm(UserChangeForm):
     def clean(self):
-        pass
+        cleaned_data = super(CustomUserChangeForm, self).clean()
+        birthday = cleaned_data.get('birthday')
+        minimum_age = date.today() - timedelta(weeks=4*12*18)
+
+        if minimum_age < birthday:
+            msg = 'Возраст пользователя не может быть младше 18 лет (%s)' % minimum_age
+            self.add_error('birthday', msg)

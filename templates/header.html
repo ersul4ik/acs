@@ -2,11 +2,11 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'home_page' %}">Access Control System</a>
+                <a class="navbar-brand" href="{% url 'reports' %}">Access Control System</a>
                 <p class="navbar-text">{{ request.user.get_position }}</p>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="search" action="{% url 'home_page' %}" method="get">
+                <form class="navbar-form navbar-left" role="search" action="{% url 'reports' %}" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder='Имя сотрудника' name="username">
                         <span class="input-group-btn">
@@ -18,11 +18,10 @@
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown">{{ request.user.get_name_and_departament }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        {#                        <li><a href="{% url 'reports:list' %}">Отчеты</a></li>#}
-                        <li><a href="{% url 'accounts:change_user' request.user.username %}">Настройки</a></li>
-                        <li><a href="{% url 'accounts:user_list' %}">Пользователи</a></li>
+                        <li><a href="{% url 'reports' %}">Отчеты</a></li>
+                        <li><a href="{% url 'accounts:change_user' request.user.username %}">Настройки пользователя</a></li>
+                        <li><a href="{% url 'accounts:user_list' %}">Список пользователей</a></li>
                         {% if request.user.is_superuser %}
-                            <li><a href="{% url 'accounts:create_user' %}">Создать пользователя</a></li>
                             <li><a href="{% url 'admin:index' %}">Администрирование</a></li>
                         {% endif %}
                         <li class="divider"></li>

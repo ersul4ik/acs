@@ -12,13 +12,13 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('applications.api.urls', namespace='api')),
     url(r'^accounts/', include('applications.accounts.urls', namespace='accounts')),
-    url(r'^reports/', include('applications.reports.urls', namespace='reports')),
+    url(r'(\d+)/$', report_main, name='reports_page'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'applications.administration.views.page_not_found'
-handler500 = 'applications.administration.views.server_error'
+handler404 = 'applications.infrastructure.views.page_not_found'
+handler500 = 'applications.infrastructure.views.server_error'
 
 urlpatterns += (
-    url(r'^$', report_main, name='home_page'),
+    url(r'^$', report_main, name='reports'),
 )

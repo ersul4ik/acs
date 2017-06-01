@@ -33,19 +33,19 @@
         <div class="large-3 large-offset-5 columns">
             <ul class="pagination pagination-sm">
                 {% if user_list.has_previous %}
-                    <li class="arrow"><a href="{% url 'reports:reports_page' user_list.previous_page_number %}?{{ request.GET.urlencode }}">&laquo;</a></li>
+                    <li class="arrow"><a href="{% url 'reports_page' user_list.previous_page_number %}?{{ request.GET.urlencode }}">&laquo;</a></li>
                 {% else %}
                     <li class="arrow unavailable"><a href="">&laquo;</a></li>
                 {% endif %}
                 {% for page in user_list.paginator.page_range %}
                     {% if page == user_list.number %}
-                        <li class="active"><a href="{% url 'reports:reports_page' page %}?{{ request.GET.urlencode }}">{{ page }}</a></li>
+                        <li class="active"><a href="{% url 'reports_page' page %}?{{ request.GET.urlencode }}">{{ page }}</a></li>
                     {% else %}
-                        <li><a href="{% url 'reports:reports_page' page %}?{{ request.GET.urlencode }}">{{ page }}</a></li>
+                        <li><a href="{% url 'reports_page' page %}?{{ request.GET.urlencode }}">{{ page }}</a></li>
                     {% endif %}
                 {% endfor %}
                 {% if user_list.has_next %}
-                    <li class="arrow"><a href="{% url 'reports:reports_page' user_list.next_page_number %}?{{ request.GET.urlencode }}">&raquo;</a></li>
+                    <li class="arrow"><a href="{% url 'reports_page' user_list.next_page_number %}?{{ request.GET.urlencode }}">&raquo;</a></li>
                 {% else %}
                     <li class="arrow unavailable"><a href="">&raquo;</a></li>
                 {% endif %}

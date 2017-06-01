@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import timedelta, date
+
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 
 from applications.accounts.models import User
 
 
-class FormProfile(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
@@ -32,58 +34,17 @@ class FormProfile(forms.ModelForm):
             'birthday': forms.DateInput(attrs={'class': 'form-control'}),
         }
 
+    def clean(self):
+        cleaned_data = super(ProfileForm, self).clean()
+        birthday = cleaned_data.get('birthday')
+        minimum_age = date.today() - timedelta(weeks=4*12*18)
 
-class FormCreateAccount(forms.ModelForm):
-    password2 = forms.CharField(widget=forms.PasswordInput(
-        attrs={
-            'placeholder': 'Пароль',
-            'class': 'form-control'
-        }
-    ))
-
-    class Meta:
-        model = User
-        fields = (
-            'username',
-            'first_name',
-            'last_name',
-            'phone',
-            'home_phone',
-            'gender',
-            'address',
-            'position',
-            'photo',
-            'birthday',
-            'password',
-            'is_staff',
-            'is_active',
-        )
-        widgets = {
-            'username': forms.TextInput(attrs={
-                'class': 'form-control', 'placeholder': 'ivan92'}),
-            'first_name': forms.TextInput(attrs={
-                'class': 'form-control', 'placeholder': 'Иван'}),
-            'last_name': forms.TextInput(attrs={
-                'class': 'form-control', 'placeholder': 'Иванов'}),
-            'phone': forms.TextInput(attrs={
-                'class': 'form-control', 'placeholder': '709 37 99 92'}),
-            'home_phone': forms.TextInput(attrs={
-                'class': 'form-control', 'placeholder': '312 67 83 98'}),
-            'gender': forms.Select(attrs={'class': 'form-control'}),
-            'address': forms.TextInput(attrs={
-                'class': 'form-control', 'placeholder': '5мкр 17д 1кв'}),
-            'position': forms.Select(attrs={'class': 'form-control'}),
-            'birthday': forms.DateInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={
-                'class': 'form-control', 'placeholder': 'Пароль'}),
-            'is_staff': forms.CheckboxInput(),
-            'is_active': forms.CheckboxInput(),
-        }
+        if minimum_age < birthday:
+            msg = 'Возраст пользователя не может быть младше 18 лет (%s)' % minimum_age
+            self.add_error('birthday', msg)
 
 
-
-
-class FormLogin(AuthenticationForm):
+class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = (
@@ -103,3 +64,14 @@ class FormLogin(AuthenticationForm):
             'class': 'form-control'
         }
     ))
+
+
+class CustomUserChangeForm(UserChangeForm):
+    def clean(self):
+        cleaned_data = super(CustomUserChangeForm, self).clean()
+        birthday = cleaned_data.get('birthday')
+        minimum_age = date.today() - timedelta(weeks=4*12*18)
+
+        if minimum_age < birthday:
+            msg = 'Возраст пользователя не может быть младше 18 лет (%s)' % minimum_age
+            self.add_error('birthday', msg)

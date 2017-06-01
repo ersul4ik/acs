@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from applications.accounts.forms import FormProfile, FormLogin, FormCreateAccount
+from applications.accounts.forms import ProfileForm, LoginForm
 from applications.accounts.models import User
 
 
@@ -16,7 +16,7 @@ def logout(request):
 
 def login(request):
     template = 'login.html'
-    form = FormLogin(data=request.POST or None)
+    form = LoginForm(data=request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             auth.login(request, form.get_user())
@@ -26,7 +26,7 @@ def login(request):
 
 @login_required
 def user_list(request):
-    template = 'users_list.html'
+    template = 'account_list.html'
     if request.user.is_superuser:
         users = User.objects.all()
     else:
@@ -37,48 +37,13 @@ def user_list(request):
 
 
 @login_required
-def create_user(request):
-    template = 'user/create_user.html'
-    form = FormCreateAccount(request.POST or None, request.FILES or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.is_active = form.cleaned_data['is_active']
-            user.is_staff = form.cleaned_data['is_staff']
-            user.save()
-    return render(request, template, {'form': form})
-
-
-@login_required
-def view_user(request, username):
-    template = 'user_view.html'
-    user = get_object_or_404(User, username=username)
-    return render(request, template)
-
-
-@login_required
 def change_user(request, username):
-    template = 'user/change_user.html'
+    template = 'account_view.html'
     user = get_object_or_404(User, username=username)
-    form = FormProfile(request.POST or None, request.FILES or None, instance=user)
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=user)
     if request.method == 'POST':
         form.save()
     return render(request, template, {
         'form': form,
-        'user': user,
+        'administrate': user,
     })
-
-
-@login_required
-def change_password(request, username):
-    template = 'user/change_password.html'
-    user = get_object_or_404(User, username=username)
-    return render(request, template)
-
-
-@login_required
-def change_permissions(request, username):
-    template = 'user/change_permissions.html'
-    user = get_object_or_404(User, username=username)
-    return render(request, template)

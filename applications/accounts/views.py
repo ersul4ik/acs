@@ -26,7 +26,7 @@ def login(request):
 
 @login_required
 def user_list(request):
-    template = 'users_list.html'
+    template = 'account_list.html'
     if request.user.is_superuser:
         users = User.objects.all()
     else:
@@ -38,7 +38,7 @@ def user_list(request):
 
 @login_required
 def create_user(request):
-    template = 'user/create_user.html'
+    template = 'administrate/create_user.html'
     form = FormCreateAccount(request.POST or None, request.FILES or None)
     if request.method == 'POST':
         if form.is_valid():
@@ -52,33 +52,33 @@ def create_user(request):
 
 @login_required
 def view_user(request, username):
-    template = 'user_view.html'
+    template = 'account_view.html'
     user = get_object_or_404(User, username=username)
     return render(request, template)
 
 
 @login_required
 def change_user(request, username):
-    template = 'user/change_user.html'
+    template = 'administrate/change_user.html'
     user = get_object_or_404(User, username=username)
     form = FormProfile(request.POST or None, request.FILES or None, instance=user)
     if request.method == 'POST':
         form.save()
     return render(request, template, {
         'form': form,
-        'user': user,
+        'administrate': user,
     })
 
 
 @login_required
 def change_password(request, username):
-    template = 'user/change_password.html'
+    template = 'administrate/change_password.html'
     user = get_object_or_404(User, username=username)
     return render(request, template)
 
 
 @login_required
 def change_permissions(request, username):
-    template = 'user/change_permissions.html'
+    template = 'administrate/change_permissions.html'
     user = get_object_or_404(User, username=username)
     return render(request, template)

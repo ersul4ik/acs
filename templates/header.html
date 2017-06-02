@@ -20,7 +20,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'reports' %}">Отчеты</a></li>
                         <li><a href="{% url 'accounts:change_user' request.user.username %}">Настройки пользователя</a></li>
-                        <li><a href="{% url 'accounts:user_list' %}">Список пользователей</a></li>
+                        <li><a href="{% url 'accounts:account_list' %}">Список пользователей</a></li>
                         {% if request.user.is_superuser %}
                             <li><a href="{% url 'admin:index' %}">Администрирование</a></li>
                         {% endif %}

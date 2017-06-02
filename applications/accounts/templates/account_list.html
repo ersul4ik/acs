@@ -1,12 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+    {% include 'account_filters.html' %}
     <div class="content col-md-10 col-md-offset-1"> <!-- main block -->
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th>Имя для авторизации</th>
                 <th>Полное имя</th>
+                <th>ID пальца</th>
                 <th>Должность</th>
                 <th>Отдел</th>
                 <th>Телефон</th>
@@ -15,13 +17,14 @@
             </thead>
             <tbody>
            <tbody>
-        {% for user in user_list %}
+        {% for user in account_list %}
             <tr>
                 <td><a href="{% url 'accounts:change_user' user.username %}">{{ user.username }}</a></td>
                 <td>{{ user.get_full_name }}</td>
+                <td>{% if user.id_finger %}{{ user.id_finger }}{% endif %}</td>
                 <td>{{ user.get_position_title }}</td>
                 <td>{{ user.get_departament_title }}</td>
-                <td>{{ user.phone }}</td>
+                <td>{% if user.phone %}{{ user.phone }}{% endif %}</td>
                 {% if request.user.is_superuser %}<td>{{ user.is_active|yesno:"Активный,Не активный" }}</td>{% endif %}
             </tr>
         {% endfor %}

@@ -15,7 +15,7 @@
             </thead>
             <tbody>
            <tbody>
-        {% for user in user_list %}
+        {% for user in account_list %}
             <tr>
                 <td><a href="{% url 'accounts:change_user' user.username %}">{{ user.username }}</a></td>
                 <td>{{ user.get_full_name }}</td>

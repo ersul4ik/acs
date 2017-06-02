@@ -25,7 +25,7 @@ def login(request):
 
 
 @login_required
-def user_list(request):
+def account_list(request):
     template = 'account_list.html'
     if request.user.is_superuser:
         users = User.objects.all()
@@ -33,7 +33,7 @@ def user_list(request):
         users = User.objects.filter(
             is_active=True, position__departament=request.user.get_departament()
         ).exclude(position__departament=None).exclude(username=None)
-    return render(request, template, {'user_list': users.order_by('-date_joined')})
+    return render(request, template, {'account_list': users.order_by('-date_joined')})
 
 
 @login_required
@@ -42,7 +42,8 @@ def change_user(request, username):
     user = get_object_or_404(User, username=username)
     form = ProfileForm(request.POST or None, request.FILES or None, instance=user)
     if request.method == 'POST':
-        form.save()
+        if form.is_valid():
+            form.save()
     return render(request, template, {
         'form': form,
         'administrate': user,

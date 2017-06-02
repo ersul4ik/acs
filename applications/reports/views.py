@@ -31,4 +31,4 @@ def report_main(request, page_number=1):
     else:
         accounting_list = AccountingAccess.objects.filter(date=datetime.today())
     paginator = Paginator(accounting_list, 15)
-    return render(request, template, {'user_list': paginator.page(page_number)})
+    return render(request, template, {'account_list': paginator.page(page_number)})

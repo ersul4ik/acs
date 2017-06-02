@@ -31,8 +31,7 @@ class ProfileForm(forms.ModelForm):
             'gender': forms.Select(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'position': forms.Select(attrs={'class': 'form-control'}),
-            'birthday': forms.SelectDateWidget(years=range(date.today().year, 1950, -1),
-                                               attrs={'class': 'form-control'}),
+            'birthday': forms.TextInput(attrs={'class': 'datepicker form-control'}),
         }
 
     def clean(self):

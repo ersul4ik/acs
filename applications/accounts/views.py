@@ -33,7 +33,17 @@ def account_list(request):
         users = User.objects.filter(
             is_active=True, position__departament=request.user.get_departament()
         ).exclude(position__departament=None).exclude(username=None)
-    return render(request, template, {'account_list': users.order_by('-date_joined')})
+    f = request.GET.get('f', 'all')
+
+    if f == 'not_active':
+        users = users.filter(is_active=False)
+    elif f == 'blank':
+        users = users.filter(id_finger=None)
+
+    return render(request, template, {
+        'account_list': users.order_by('-date_joined'),
+        'filter': f,
+    })
 
 
 @login_required

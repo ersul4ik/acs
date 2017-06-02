@@ -1,0 +1,13 @@
+<div class="filters col-md-10 col-md-offset-1"> <!-- filter block -->
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-right">
+                <a href="?f=all" class="label label-{% if filter != 'all' %}primary{% else %}default{% endif %}">Все</a>
+                <a href="?f=not_active" class="label label-{% if filter != 'not_active' %}primary{% else %}default{% endif %}">Неактивные</a>
+                <a href="?f=blank" class="label label-{% if filter != 'blank' %}primary{% else %}default{% endif %}">Без приязки к пальцу</a>
+            </div>
+        </div>
+    </div>
+    <br>
+</div> <!-- filter block -->

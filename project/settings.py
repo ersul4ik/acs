@@ -18,8 +18,8 @@ LOGIN_URL = '/accounts/login/'
 AUTH_USER_MODEL = 'accounts.User'
 
 # ==================== SECURITY ===============================================
-SECRET_KEY = 'x_5-wa0^s6$z-u&wz)1bfcce9x^$n(qmfpch53tjre=-3_(za-'
-ALLOWED_HOSTS = ['*']
+SECRET_KEY = os.getenv("ACS_SECRET_KEY")
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # ==================== INSTALLED_APPS =========================================
